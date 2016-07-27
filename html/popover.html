@@ -1,8 +1,14 @@
 <!doctype html>
 <div class="form-group centermass" id="popover">
+<<<<<<< 5e0c64f6fb51f1f131535a3f1a0b7db7adb6d91c
     <div class='centerbutton'>
         <div ng-controller="typeaheadCtrl">
             <input type="text" ng-model="selected" typeahead-on-select="openTemplate($item, $model, $label)" uib-typeahead="contract.name for contract in contracts | filter:$viewValue | limitTo:10" placeholder="Contract Name">
         </div>
     </div>
+=======
+  <div class='centerbutton'>
+    <input type="text" ng-model="selected" typeahead-on-select="openTemplate($item, $model, $label)" uib-typeahead="contract.name for contract in contracts | filter:$viewValue | limitTo:10" placeholder="Contract Name">
+  </div>
+>>>>>>> moved code to server
 </div>

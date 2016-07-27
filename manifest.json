@@ -1,18 +1,34 @@
 {
   "manifest_version": 2,
 
-  "name": "Gmail Integration",
-  "description": "This extension creates a button on gmail that says compose contract",
-  "version": "1.0",
+  "name": "Derp Derp Derp",
+  "description": "This extension does nothing",
+  "version": "1.2",
   "browser_action": {
+<<<<<<< 5e0c64f6fb51f1f131535a3f1a0b7db7adb6d91c
     "default_icon": "/resources/hermesis.ico"
   },
   "background" : {
     "scripts": ["/lib/client.js", "/background/background.js"],
 	"persistent": false
+=======
+    "default_icon": "resources/hermesis.ico"
   },
-  "permissions": [ "activeTab", "tabs", "https://cjohnson.ignorelist.com:4343/*"],
+  "background" : {
+    "scripts": [
+      "background/background.js",
+      "lib/jquery-3.1.0.min.js"
+    ],
+	  "persistent": false
+>>>>>>> moved code to server
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://cjohnson.ignorelist.com:4343/*"
+  ],
   "content_scripts": [
+<<<<<<< 5e0c64f6fb51f1f131535a3f1a0b7db7adb6d91c
 	{
 		"matches":	["http://gmail.google.com/*", "https://gmail.google.com/*", "http://mail.google.com/*", "https://mail.google.com/*"],
 		"js":		[
@@ -27,11 +43,41 @@
 		"all_frames":	true,
 		"run_at":	"document_end"
 	}
+=======
+	  {
+  		"matches":	[
+  		  "https://gmail.google.com/*",
+  		  "https://mail.google.com/*"
+		  ],
+  		"js":	[
+        "lib/angular.min.js",
+        "lib/ui-bootstrap-tpls-0.14.3.min.js",
+        "lib/jquery-3.1.0.min.js",
+        "lib/inboxsdk.js",
+        "lib/angular-animate.js",
+        "extension.js"
+      ],
+  		"css":  [
+  		  "/css/compose.css",
+  		  "/lib/bootstrap.min.css"
+		  ],
+  		"run_at":	"document_end"
+	  }
+>>>>>>> moved code to server
   ],
-  "content_security_policy": "script-src 'self' http://mail.google.com https://apis.google.com 'unsafe-eval'; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://apis.google.com 'unsafe-eval'; object-src 'self'",
   "offline_enabled": false,
   "web_accessible_resources": [
+<<<<<<< 5e0c64f6fb51f1f131535a3f1a0b7db7adb6d91c
       "/html/popover.html",
       "/resources/hermesis.ico"
+=======
+    "resources/*.ico",
+    "controllers/*.js",
+    "services/*.js",
+    "directives/*.js",
+    "html/*.html",
+    "lib/*.map"
+>>>>>>> moved code to server
   ]
 }

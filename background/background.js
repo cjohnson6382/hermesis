@@ -1,6 +1,7 @@
 //  API information
 var HERMESIS_API = 'https://cjohnson.ignorelist.com:4343';
 
+<<<<<<< 5e0c64f6fb51f1f131535a3f1a0b7db7adb6d91c
 var requester = function () {
   return {
     contract_fields: function (request) {
@@ -17,12 +18,31 @@ var requester = function () {
       var tabId;
       chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
         tabId = tabs[0].id;
+=======
+var requester = {
+  fetchcontracts: function (request) {
+    $.ajax({
+      url: HERMESIS_API + "/listfiles",
+      method: "GET"
+    })
+      .done(function (resp) {
+        return resp;
+>>>>>>> moved code to server
       });
-      
-      apiCaller.apiCall('https://cjohnson.ignorelist.com:4343/auth', function (response) {
-        var OauthUrl = response.txt;
+  },
+  auth: function (request) {
+    var tabId;
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+      tabId = tabs[0].id;
+    });
+    
+    $.ajax({
+      url: HERMESIS_API + "/auth",
+      method: "GET",
+    })
+      .done(function (resp) {
         var newTabId;
-        chrome.tabs.create({url: OauthUrl}, function (tab) {
+        chrome.tabs.create({url: resp.txt}, function (tab) {
           newTabId = tab.id;
           var intervalId = setInterval(function () {
             chrome.tabs.get(newTabId, function () {
@@ -33,23 +53,17 @@ var requester = function () {
           }, 200);
         });
       });
-    },
-    popover_html: function (request) {
-      //  to get this template from the server, need to use a URL, not a filename
-      apiCaller.apiCall('myPopoverTemplate.html', function (response) {
-        return response.responseText;
+  },
+  fillintemplate: function (request) {
+    $.ajax({
+      url: HERMESIS_API + "/getfilledtemplate",
+      method: "POST",
+      data: { id: request.template, fields: request.userfields }
+    })
+      .done(function (resp) {
+        return resp.responseText;
       });
-    },
-    fillintemplate: function (request) {
-        var userfields = request.userfields;
-        var template = request.template;
-
-        apiCaller.getfilledtemplate(template, userfields, function (resp) {
-            //  the code here was never finished, so the function returns the data of the downloaded file?
-            return resp.responseText;
-        });
-    }
-  };
+  }
 };
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendMessage) {
